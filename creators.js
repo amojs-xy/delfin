@@ -24,7 +24,7 @@ export function createState (store) {
 
 export function createActions (store) {
   store.forEachAction((actionKey, actionFn) => {
-    store['$' + actionKey] = (payload) => {
+    store[actionKey] = (payload) => {
       const fn = actionFn.apply(store, [store, payload]);
 
       if (isPromise(fn)) {
