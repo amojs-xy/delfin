@@ -1,4 +1,4 @@
-import Center from './src/Center';
+import Center from './libs/Center';
 import {
   createInjections
 } from './creators';

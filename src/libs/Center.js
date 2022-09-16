@@ -1,5 +1,5 @@
 import Store from './Store';
-import { forEachKeyValue } from './utils';
+import { forEachKeyValue } from '../utils';
 
 export default class Center {
   constructor (rawCenter) {
