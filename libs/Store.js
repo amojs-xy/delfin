@@ -16,10 +16,10 @@ export default class Store {
     getters && (this._getters = getters);
     actions && (this._actions = actions);
     
-    this.initialize();
+    this._initialize();
   }
 
-  initialize () {
+  _initialize () {
     this._state && createState(this);
     this._constant && createConstant(this);
     this._getters && createGetters(this);
@@ -52,19 +52,19 @@ export default class Store {
     }
   }
 
-  forEachAction (callback) {
+  _forEachAction (callback) {
     forEachKeyValue(this._actions, callback);
   }
 
-  forEachGetters (callback) {
+  _forEachGetters (callback) {
     forEachKeyValue(this._getters, callback);
   }
 
-  forEachState (callback) {
+  _forEachState (callback) {
     forEachKeyValue(this._state.data, callback);
   }
 
-  forEachConstant (callback) {
+  _forEachConstant (callback) {
     forEachKeyValue(this._constant, callback);
   }
 }
