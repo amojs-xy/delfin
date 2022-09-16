@@ -1,11 +1,13 @@
 import {
   createApplet,
-  useCenter
+  useCenter,
+  createStore
 } from './src/apis';
 
 export {
   createApplet,
-  useCenter
+  useCenter,
+  createStore
 }
 
 
