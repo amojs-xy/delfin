@@ -1,11 +1,11 @@
 import {
-  createApplet,
+  createDelfin,
   useCenter,
   createStore
 } from './apis';
 
 export {
-  createApplet,
+  createDelfin,
   useCenter,
   createStore
 }

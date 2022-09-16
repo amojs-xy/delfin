@@ -4,7 +4,7 @@ import {
 } from './creators';
 import Store from './libs/Store';
 
-export function createApplet (rawCenter) {
+export function createDelfin (rawCenter) {
   return new Center(rawCenter);
 }
 
