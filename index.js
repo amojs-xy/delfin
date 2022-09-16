@@ -2,7 +2,7 @@ import {
   createApplet,
   useCenter,
   createStore
-} from './src/apis';
+} from './apis';
 
 export {
   createApplet,
