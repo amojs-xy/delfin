@@ -31,6 +31,10 @@ export default class Store {
   }
 
   $set (...args) {
+    if (!args || args.length === 0) {
+      throw new Error('$set needs 2 arguments. [ prop, state or value ]');
+    }
+
     const [ prop, state ] = args;
 
     if (isObject(state)) {
