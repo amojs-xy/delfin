@@ -1,11 +1,11 @@
 import { reactive } from 'vue';
-import { forEachKeyValue, isObject } from './utils';
+import { forEachKeyValue, isObject } from '../utils';
 import {
   createConstant,
   createState,
   createActions,
   createGetters
-} from './creators';
+} from '../creators';
 
 export default class Store {
   constructor (rawStore) {
