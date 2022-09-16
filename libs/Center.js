@@ -18,7 +18,7 @@ export default class Center {
       throw new Error('$set needs 2 arguments. [ storeKey, rawStore ]');
     }
 
-    if (!isObject(args[0])) {
+    if (!isObject(args[1])) {
       throw new Error('The second argument must be the type of Object.');
     }
 

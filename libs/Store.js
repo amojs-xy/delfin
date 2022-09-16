@@ -31,7 +31,7 @@ export default class Store {
   }
 
   $set (...args) {
-    if (!args || args.length === 0) {
+    if (!args || args.length < 2) {
       throw new Error('$set needs 2 arguments. [ prop, state or value ]');
     }
 
