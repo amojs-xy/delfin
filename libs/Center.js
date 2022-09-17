@@ -1,5 +1,5 @@
 import Store from './Store';
-import { forEachKeyValue, isEmptyObject, isObject } from '../utils';
+import { forEachKeyValue, isObject } from '../utils';
 
 export default class Center {
   constructor (rawCenter) {
@@ -9,7 +9,7 @@ export default class Center {
 
   $setStore (...args) {
     if (args.length < 2) {
-      throw new Error('$set needs 2 arguments. [ storeKey, rawStore ]');
+      throw new Error('$setStore needs 2 arguments. [ storeKey, rawStore ]');
     }
 
     if (!isObject(args[1])) {
@@ -29,6 +29,7 @@ export default class Center {
   _createStore () {
     forEachKeyValue(this._rawCenter, (storeKey, storeValue) => {
       this[storeKey] = new Store(storeValue);
+      this[storeKey].parent = this;
     })
   }
 

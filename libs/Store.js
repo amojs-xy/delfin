@@ -30,27 +30,33 @@ export default class Store {
     this._getters && createGetters(this);
     this._actions && createActions(this);
   }
+  
+  _setValue (prop, state, data, callback) {
+    if (data.hasOwnProperty(prop)) {
+      if (isObject(state)) {
+        data[prop] = {
+          ...deepClone(data[prop]),
+          ...state
+        }
+      } else {
+        data[prop] = state;
+      }
+    } else {
+      data[prop] = state;
+      callback(this, prop);
+    }
+  }
 
   $setConstant (...args) {
     if (!args || args.length < 2) {
-      throw new Error('$setContant needs 2 arguments. [ prop, state or value ]');
+      throw new Error('$setConstant needs 2 arguments. [ prop, state or value ]');
     }
 
     const [ prop, state ] = args;
 
-    if (this._constant.hasOwnProperty(prop)) {
-      if (isObject(state)) {
-        this._constant[prop] = {
-          ...deepClone(this._constant[prop]),
-          ...state
-        }
-      } else {
-        this._constant[prop] = state;
-      }
-    } else {
-      this._constant[prop] = state;
+    this._setValue(prop, state, this._constant, () => {
       defineConstant(this, prop);
-    }
+    });
   }
 
   $setState (...args) {
@@ -60,19 +66,9 @@ export default class Store {
 
     const [ prop, state ] = args;
 
-    if (this._state.data.hasOwnProperty(prop)) {
-      if (isObject(state)) {
-        this._state.data[prop] = {
-          ...deepClone(this._state.data[prop]),
-          ...state
-        }
-      } else {
-        this._state.data[prop] = state;
-      }
-    } else {
-      this._state.data[prop] = state;
+    this._setValue(prop, state, this._state.data, () => {
       defineProperty(this, prop);
-    }
+    });
   }
 
   $setGetter (getterKey, getterFn) {

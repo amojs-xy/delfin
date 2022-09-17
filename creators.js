@@ -1,4 +1,4 @@
-import { computed, inject, ref } from 'vue';
+import { computed, inject } from 'vue';
 import { isPromise } from './utils';
 
 export function createConstant (store) {
