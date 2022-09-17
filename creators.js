@@ -50,10 +50,6 @@ export function createInjections (stores) {
     return inject('center');
   }
 
-  if (stores.length === 1) {
-    return inject(stores[0]);
-  }
-
   if (typeof stores === 'string') {
     return inject(stores);
   }

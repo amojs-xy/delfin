@@ -27,7 +27,7 @@ export default class Store {
     this._actions && createActions(this);
   }
 
-  $set (...args) {
+  $setState (...args) {
     if (!args || args.length < 2) {
       throw new Error('$set needs 2 arguments. [ prop, state or value ]');
     }

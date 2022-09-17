@@ -3,9 +3,14 @@ import {
   createInjections
 } from './creators';
 import Store from './libs/Store';
+import { isEmptyObject } from './utils';
 
 export function createDelfin (rawCenter) {
-  return new Center(rawCenter);
+  if (rawCenter && !isEmptyObject(rawCenter)) {
+    return new Center(rawCenter);
+  }
+
+  return null;
 }
 
 export function useCenter (stores) {
@@ -13,7 +18,11 @@ export function useCenter (stores) {
 }
 
 export function createStore (rawStore) {
-  return () => {
-    return new Store(rawStore);
+  if (rawStore && !isEmptyObject(rawStore)) {
+    return () => {
+      return new Store(rawStore);
+    }
   }
+  
+  return null;
 }

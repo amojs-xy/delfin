@@ -1,19 +1,13 @@
 import Store from './Store';
-import { forEachKeyValue, isObject } from '../utils';
+import { forEachKeyValue, isEmptyObject, isObject } from '../utils';
 
 export default class Center {
   constructor (rawCenter) {
     this._rawCenter = rawCenter;
-    this.createStore();
+    this._createStore();
   }
 
-  createStore () {
-    forEachKeyValue(this._rawCenter, (storeKey, storeValue) => {
-      this[storeKey] = new Store(storeValue);
-    })
-  }
-
-  $set (...args) {
+  $setStore (...args) {
     if (args.length < 2) {
       throw new Error('$set needs 2 arguments. [ storeKey, rawStore ]');
     }
@@ -29,10 +23,16 @@ export default class Center {
   }
 
   install (app) {
-    this.createProviders(app);
+    this._createProviders(app);
   }
 
-  createProviders (app) {
+  _createStore () {
+    forEachKeyValue(this._rawCenter, (storeKey, storeValue) => {
+      this[storeKey] = new Store(storeValue);
+    })
+  }
+
+  _createProviders (app) {
     app.provide('center', this);
 
     forEachKeyValue(this, (storeKey, storeValue) => {

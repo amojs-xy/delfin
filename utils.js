@@ -10,6 +10,10 @@ export function isObject (value) {
   return value && Object.prototype.toString.call(value) === '[object Object]';
 }
 
+export function isEmptyObject (value) {
+  return Object.keys(value).length === 0;
+}
+
 export function deepClone (origin, hashMap = new WeakMap()) {
   if (origin == undefined || typeof origin !== 'object') {
     return origin;
