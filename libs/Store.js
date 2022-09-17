@@ -7,7 +7,8 @@ import {
   createGetters,
   defineProperty,
   defineAction,
-  defineGetter
+  defineGetter,
+  defineConstant
 } from '../creators';
 import { deepClone } from '../utils';
 
@@ -30,9 +31,31 @@ export default class Store {
     this._actions && createActions(this);
   }
 
+  $setConstant (...args) {
+    if (!args || args.length < 2) {
+      throw new Error('$setContant needs 2 arguments. [ prop, state or value ]');
+    }
+
+    const [ prop, state ] = args;
+
+    if (this._constant.hasOwnProperty(prop)) {
+      if (isObject(state)) {
+        this._constant[prop] = {
+          ...deepClone(this._constant[prop]),
+          ...state
+        }
+      } else {
+        this._constant[prop] = state;
+      }
+    } else {
+      this._constant[prop] = state;
+      defineConstant(this, prop);
+    }
+  }
+
   $setState (...args) {
     if (!args || args.length < 2) {
-      throw new Error('$set needs 2 arguments. [ prop, state or value ]');
+      throw new Error('$setState needs 2 arguments. [ prop, state or value ]');
     }
 
     const [ prop, state ] = args;

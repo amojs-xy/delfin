@@ -3,10 +3,7 @@ import { isPromise } from './utils';
 
 export function createConstant (store) {
   store._forEachConstant(key => {
-    Object.defineProperty(store, key, {
-      enumerable: true,
-      get: () => store._constant[key]
-    })
+    defineConstant(store, key);
   })
 }
 
@@ -73,5 +70,12 @@ export function defineGetter (store, getterKey, getterFn) {
   Object.defineProperty(store, getterKey, {
     enumerable: true,
     get: () => getterComputed.value
+  })
+}
+
+export function defineConstant (store, key) {
+  Object.defineProperty(store, key, {
+    enumerable: true,
+    get: () => store._constant[key]
   })
 }
