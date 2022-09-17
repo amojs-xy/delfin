@@ -1,0 +1,32 @@
+{
+  "name": "@delfin/docs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vitepress dev .",
+    "build": "vitepress build .",
+    "serve": "vitepress serve .",
+    "author": "zx ./scripts/contributors.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "delfin": "workspace:*"
+  },
+  "devDependencies": {
+    "fast-glob": "^3.2.12",
+    "fs-extra": "^10.1.0",
+    "unocss": "^0.45.21",
+    "vitepress": "1.0.0-alpha.15",
+    "vue": "^3.2.39",
+    "zx": "^7.0.8"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@algolia/client-search"
+      ]
+    }
+  }
+}
