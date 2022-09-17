@@ -7,7 +7,7 @@ import {
   createActions,
   createGetters
 } from '../creators';
-import { cloneDeep } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 
 export default class Store {
   constructor (rawStore) {
