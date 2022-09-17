@@ -11,7 +11,7 @@ export function isObject (value) {
 }
 
 export function isEmptyObject (value) {
-  return Object.keys(value).length === 0;
+  return value && Object.keys(value).length === 0;
 }
 
 export function deepClone (origin, hashMap = new WeakMap()) {

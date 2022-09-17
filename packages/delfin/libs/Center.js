@@ -1,5 +1,9 @@
 import Store from './Store';
-import { forEachKeyValue, isObject } from '../utils';
+
+import { 
+  forEachKeyValue, 
+  isObject 
+} from '../utils';
 
 export default class Center {
   constructor (rawCenter) {
@@ -18,23 +22,23 @@ export default class Center {
 
     const [ storeKey, rawStore ] = args;
 
-    return this._createStore(storeKey, rawStore);
+    return Center.createStore(this, storeKey, rawStore);
   }
 
   install (app) {
     this._createProviders(app);
   }
 
-  _defineStore () {
-    forEachKeyValue(this._rawCenter, (storeKey, storeValue) => {
-      this._createStore(storeKey, storeValue);
-    })
+  static createStore (center, storeKey, storeValue) {
+    center[storeKey] = new Store(storeValue);
+    center[storeKey].constructor._parent = center;
+    return center[storeKey];
   }
 
-  _createStore (storeKey, storeValue) {
-    this[storeKey] = new Store(storeValue);
-    this[storeKey].constructor._parent = this;
-    return this[storeKey];
+  _defineStore () {
+    forEachKeyValue(this._rawCenter, (storeKey, storeValue) => {
+      Center.createStore(this, storeKey, storeValue);
+    })
   }
 
   _createProviders (app) {

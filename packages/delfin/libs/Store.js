@@ -1,16 +1,26 @@
-import { reactive } from 'vue';
-import { forEachKeyValue, isObject } from '../utils';
+import { 
+  reactive 
+} from 'vue';
+
+import { 
+  forEachKeyValue, 
+  isObject 
+} from '../utils';
+
 import {
   createConstant,
   createState,
-  createActions,
   createGetters,
-  defineProperty,
-  defineAction,
+  createActions,
+  defineConstant,
+  defineState,
   defineGetter,
-  defineConstant
+  defineAction
 } from '../creators';
-import { deepClone } from '../utils';
+
+import { 
+  deepClone 
+} from '../utils';
 
 export default class Store {
   constructor (rawStore) {
@@ -24,29 +34,6 @@ export default class Store {
     this._initialize();
   }
 
-  _initialize () {
-    this._state && createState(this);
-    this._constant && createConstant(this);
-    this._getters && createGetters(this);
-    this._actions && createActions(this);
-  }
-  
-  _setValue (prop, state, data, callback) {
-    if (data.hasOwnProperty(prop)) {
-      if (isObject(state)) {
-        data[prop] = {
-          ...deepClone(data[prop]),
-          ...state
-        }
-      } else {
-        data[prop] = state;
-      }
-    } else {
-      data[prop] = state;
-      callback(this, prop);
-    }
-  }
-
   get $parent () {
     return Store._parent;
   }
@@ -58,7 +45,7 @@ export default class Store {
 
     const [ prop, state ] = args;
 
-    this._setValue(prop, state, this._constant, () => {
+    Store.setValue(prop, state, this._constant, () => {
       defineConstant(this, prop);
     });
   }
@@ -70,8 +57,8 @@ export default class Store {
 
     const [ prop, state ] = args;
 
-    this._setValue(prop, state, this._state.data, () => {
-      defineProperty(this, prop);
+    Store.setValue(prop, state, this._state.data, () => {
+      defineState(this, prop);
     });
   }
 
@@ -89,19 +76,42 @@ export default class Store {
     }
   }
 
-  _forEachAction (callback) {
-    forEachKeyValue(this._actions, callback);
+  _initialize () {
+    this._state && createState(this);
+    this._constant && createConstant(this);
+    this._getters && createGetters(this);
+    this._actions && createActions(this);
+  }
+  
+  static setValue (prop, state, data, callback) {
+    if (data.hasOwnProperty(prop)) {
+      if (isObject(state)) {
+        data[prop] = {
+          ...deepClone(data[prop]),
+          ...state
+        }
+      } else {
+        data[prop] = state;
+      }
+    } else {
+      data[prop] = state;
+      callback(this, prop);
+    }
   }
 
-  _forEachGetters (callback) {
-    forEachKeyValue(this._getters, callback);
+  _forEachConstant (callback) {
+    forEachKeyValue(this._constant, callback);
   }
 
   _forEachState (callback) {
     forEachKeyValue(this._state.data, callback);
   }
 
-  _forEachConstant (callback) {
-    forEachKeyValue(this._constant, callback);
+  _forEachGetters (callback) {
+    forEachKeyValue(this._getters, callback);
+  }
+
+  _forEachAction (callback) {
+    forEachKeyValue(this._actions, callback);
   }
 }

@@ -1,9 +1,13 @@
 import Center from './libs/Center';
+import Store from './libs/Store';
+
 import {
   createInjections
 } from './creators';
-import Store from './libs/Store';
-import { isEmptyObject } from './utils';
+
+import { 
+  isEmptyObject 
+} from './utils';
 
 export function createDelfin (rawCenter) {
   if (rawCenter && !isEmptyObject(rawCenter)) {
@@ -11,10 +15,6 @@ export function createDelfin (rawCenter) {
   }
 
   return null;
-}
-
-export function useCenter (stores) {
-  return createInjections(stores);
 }
 
 export function createStore (rawStore) {
@@ -25,4 +25,8 @@ export function createStore (rawStore) {
   }
   
   return null;
+}
+
+export function useCenter (stores) {
+  return createInjections(stores);
 }

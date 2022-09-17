@@ -27,7 +27,7 @@ layout: home
 <main class="max-w-960px mx-auto overflow-overlay">
   <section class="flex flex-col items-center justify-center py-168px px-32px">
     <h1 class="text-#ff7d00 text-6xl font-bold">Delfin</h1>
-    <h2 class="font-500 mt-3 mb-8">Delfin is new generation of SHARED-STATE manager for Vue 3 application.</h2>
+    <h2 class="font-500 mt-3 mb-8">Delfin is a new generation of SHARED-STATE manager for Vue 3 application.</h2>
     <div class="text-center">
       <a href="/guide/introduction" class="btn !h-34px !leading-34px">😄 Get Started</a>
       <a href="/guide/playground" class="btn !h-34px !leading-34px">🎮 Playground</a>
