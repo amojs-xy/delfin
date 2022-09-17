@@ -1,4 +1,4 @@
-import { computed, inject } from 'vue';
+import { computed, inject, ref } from 'vue';
 import { isPromise } from './utils';
 
 export function createConstant (store) {
@@ -20,12 +20,6 @@ export function createState (store) {
       }
     })
   })
-}
-
-export function createComputedState (store) {
-  store._forEachState(key => {
-    store._computedState[key] = computed(() => store._state.data[key]);
-  });
 }
 
 export function createActions (store) {

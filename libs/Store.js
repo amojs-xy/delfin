@@ -6,7 +6,7 @@ import {
   createActions,
   createGetters
 } from '../creators';
-import cloneDeep from 'lodash/cloneDeep';
+import { deepClone } from '../utils';
 
 export default class Store {
   constructor (rawStore) {
@@ -27,10 +27,6 @@ export default class Store {
     this._actions && createActions(this);
   }
 
-  get computed () {
-    return this._computedState;
-  }
-
   $set (...args) {
     if (!args || args.length < 2) {
       throw new Error('$set needs 2 arguments. [ prop, state or value ]');
@@ -41,7 +37,7 @@ export default class Store {
     if (this._state.data.hasOwnProperty(prop)) {
       if (isObject(state)) {
         this._state.data[prop] = {
-          ...cloneDeep(this._state.data[prop]),
+          ...deepClone(this._state.data[prop]),
           ...state
         }
       } else {
