@@ -3,15 +3,18 @@ import { forEachKeyValue, isObject } from '../utils';
 import {
   createConstant,
   createState,
+  createComputedState,
   createActions,
   createGetters
 } from '../creators';
+import { cloneDeep } from 'lodash';
 
 export default class Store {
   constructor (rawStore) {
     const { constant, state, getters, actions } = rawStore;
     
     state && (this._state = reactive({ data: state }));
+    state && (this._computedState = {});
     constant && (this._constant = constant);
     getters && (this._getters = getters);
     actions && (this._actions = actions);
@@ -21,13 +24,14 @@ export default class Store {
 
   _initialize () {
     this._state && createState(this);
+    this._computedState && createComputedState(this);
     this._constant && createConstant(this);
     this._getters && createGetters(this);
     this._actions && createActions(this);
   }
 
-  get state () {
-    return this._state.data;
+  get computed () {
+    return this._computedState;
   }
 
   $set (...args) {
@@ -37,15 +41,18 @@ export default class Store {
 
     const [ prop, state ] = args;
 
-    if (isObject(state)) {
-      forEachKeyValue(state, (key, value) => {
-        this._state.data[prop][key] = value;
-      });
-      return;
-    }
-
-    if (!this._state.data[prop]) {
+    if (this._state.data.hasOwnProperty(prop)) {
+      if (isObject(state)) {
+        this._state.data[prop] = {
+          ...cloneDeep(this._state.data[prop]),
+          ...state
+        }
+      } else {
+        this._state.data[prop] = state;
+      }
+    } else {
       this._state.data[prop] = state;
+
       Object.defineProperty(this, prop, {
         enumerable: true,
         get: () => this._state.data[prop],

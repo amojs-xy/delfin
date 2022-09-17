@@ -22,6 +22,12 @@ export function createState (store) {
   })
 }
 
+export function createComputedState (store) {
+  store._forEachState(key => {
+    store._computedState[key] = computed(() => store._state.data[key]);
+  });
+}
+
 export function createActions (store) {
   store._forEachAction((actionKey, actionFn) => {
     store[actionKey] = (payload) => {
@@ -38,7 +44,8 @@ export function createActions (store) {
 
 export function createGetters (store) {
   store._forEachGetters((getterKey, getterFn) => {
-    const getterComputed = computed(() => getterFn.apply(store, [store.state]));
+    const getterComputed = computed(() => getterFn.apply(store, [store]));
+    store._computedState[getterKey] = getterComputed;
     Object.defineProperty(store, getterKey, {
       get: () => getterComputed.value
     })
