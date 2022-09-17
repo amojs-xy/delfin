@@ -24,13 +24,19 @@ import {
 
 export default class Store {
   constructor (rawStore) {
-    const { constant, state, getters, actions } = rawStore;
+    const { 
+      constant, 
+      state, 
+      getters, 
+      actions 
+    } = rawStore;
     
     state && (this._state = reactive({ data: state }));
     constant && (this._constant = constant);
     getters && (this._getters = getters);
     actions && (this._actions = actions);
-    
+    this._rawStore = deepClone(rawStore);
+
     this._initialize();
   }
 
@@ -76,6 +82,10 @@ export default class Store {
     }
   }
 
+  $reset () {
+    
+  }
+
   _initialize () {
     this._state && createState(this);
     this._constant && createConstant(this);
@@ -95,7 +105,7 @@ export default class Store {
       }
     } else {
       data[prop] = state;
-      callback(this, prop);
+      callback();
     }
   }
 
