@@ -2,3 +2,27 @@
 body {
   overflow: overlay;
 }
+
+.btn {
+  display: inline-block;
+  padding: 0 16px;
+  height: 30px;
+  line-height: 1;
+  border-radius: 4px;
+  background-color: var(--vp-c-bg-soft);
+  border: 1px dashed var(--vp-button-alt-hover-bg);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.btn:hover {
+  background-color: var(--vp-button-alt-hover-bg);
+}
+
+.btn:active {
+  background-color: rgba(255,125,0,0.1);
+}
+
+.btn + .btn {
+  margin-left: 12px;
+}
