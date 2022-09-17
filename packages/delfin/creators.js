@@ -31,27 +31,10 @@ export function createActions (store) {
   })
 }
 
-export function createInjections (stores) {
-  if (!stores || stores.length === 0) {
-    return inject('center');
-  }
-
-  if (typeof stores === 'string') {
-    return inject(stores);
-  }
-
-  const injections = {};
-
-  stores.forEach(storeKey => {
-    injections[storeKey] = inject(storeKey);
-  });
-
-  return injections;
-}
-
 export function defineConstant (store, key) {
   Object.defineProperty(store, key, {
     enumerable: true,
+    configurable: true,
     get: () => store._constant[key]
   })
 }
@@ -59,6 +42,7 @@ export function defineConstant (store, key) {
 export function defineState (store, key) {
   Object.defineProperty(store, key, {
     enumerable: true,
+    configurable: true,
     get: () => store._state.data[key],
     set (newValue) {
       store._state.data[key] = newValue;
@@ -70,6 +54,7 @@ export function defineGetter (store, getterKey, getterFn) {
   const getterComputed = computed(() => getterFn.apply(store, [store]));
   Object.defineProperty(store, getterKey, {
     enumerable: true,
+    configurable: true,
     get: () => getterComputed.value
   })
 }
@@ -78,7 +63,7 @@ export function defineAction (store, actionKey, actionFn) {
   store[actionKey] = (payload) => {
     const fn = actionFn.apply(store, [store, payload]);
 
-    if (isPromise(fn)) {
+    if (!isPromise(fn)) {
       return Promise.resolve(fn);
     }
 

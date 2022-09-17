@@ -19,14 +19,6 @@ export function deepClone (origin, hashMap = new WeakMap()) {
     return origin;
   }
 
-  if (origin instanceof Date) {
-    return new Date(origin);
-  }
-
-  if (origin instanceof RegExp) {
-    return new RegExp(origin);
-  }
-
   const hashKey = hashMap.get(origin);
 
   if (hashKey) {

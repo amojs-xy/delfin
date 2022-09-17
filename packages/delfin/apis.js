@@ -2,8 +2,8 @@ import Center from './libs/Center';
 import Store from './libs/Store';
 
 import {
-  createInjections
-} from './creators';
+  inject
+} from 'vue';
 
 import { 
   isEmptyObject 
@@ -27,6 +27,26 @@ export function createStore (rawStore) {
   return null;
 }
 
-export function useCenter (stores) {
-  return createInjections(stores);
+export function useCenter () {
+  // return createInjections(stores);
+  return inject('center', {});
 }
+
+// Center {
+//   counter: {
+
+//   },
+//   user: {
+
+//   },
+//   calculator: {
+
+//   }
+// }
+
+/**
+ * Store {
+ * 
+ * }
+ * 
+ */
