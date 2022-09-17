@@ -6,7 +6,7 @@
   "repository": "git",
   "homepage": "https://github.com/amojs-xy/delfin",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cd ./packages/docs && npm run dev"
   },
   "keywords": [
     "delfin",
@@ -16,5 +16,8 @@
     "pinia"
   ],
   "author": "Amo-xiaoye",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "pnpm": "^7.11.0"
+  }
 }
