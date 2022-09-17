@@ -3,7 +3,7 @@ import Unocss from 'unocss/vite'
 
 export default defineConfig({
   plugins: [
-    Unocss({ /* options */ }),
+    Unocss(),
   ],
   server: {
     fs: {

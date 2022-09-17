@@ -17,7 +17,6 @@
     "states",
     "shared-state"
   ],
-  "author": "Amo-xiaoye",
   "license": "MIT",
   "devDependencies": {
     "pnpm": "^7.11.0"
