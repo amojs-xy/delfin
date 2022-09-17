@@ -4,8 +4,13 @@ import {
   createConstant,
   createState,
   createActions,
-  createGetters
+  createGetters,
+  defineProperty,
+  defineAction,
+  defineGetter,
+  defineConstant
 } from '../creators';
+import { deepClone } from '../utils';
 
 export default class Store {
   constructor (rawStore) {
@@ -26,33 +31,61 @@ export default class Store {
     this._actions && createActions(this);
   }
 
-  get state () {
-    return this._state.data;
-  }
-
-  $set (...args) {
+  $setConstant (...args) {
     if (!args || args.length < 2) {
-      throw new Error('$set needs 2 arguments. [ prop, state or value ]');
+      throw new Error('$setContant needs 2 arguments. [ prop, state or value ]');
     }
 
     const [ prop, state ] = args;
 
-    if (isObject(state)) {
-      forEachKeyValue(state, (key, value) => {
-        this._state.data[prop][key] = value;
-      });
-      return;
+    if (this._constant.hasOwnProperty(prop)) {
+      if (isObject(state)) {
+        this._constant[prop] = {
+          ...deepClone(this._constant[prop]),
+          ...state
+        }
+      } else {
+        this._constant[prop] = state;
+      }
+    } else {
+      this._constant[prop] = state;
+      defineConstant(this, prop);
+    }
+  }
+
+  $setState (...args) {
+    if (!args || args.length < 2) {
+      throw new Error('$setState needs 2 arguments. [ prop, state or value ]');
     }
 
-    if (!this._state.data[prop]) {
-      this._state.data[prop] = state;
-      Object.defineProperty(this, prop, {
-        enumerable: true,
-        get: () => this._state.data[prop],
-        set (newValue) {
-          this._state.data[prop] = newValue;
+    const [ prop, state ] = args;
+
+    if (this._state.data.hasOwnProperty(prop)) {
+      if (isObject(state)) {
+        this._state.data[prop] = {
+          ...deepClone(this._state.data[prop]),
+          ...state
         }
-      })
+      } else {
+        this._state.data[prop] = state;
+      }
+    } else {
+      this._state.data[prop] = state;
+      defineProperty(this, prop);
+    }
+  }
+
+  $setGetter (getterKey, getterFn) {
+    if (!this._getters[getterKey]) {
+      this._getters[getterKey] = getterFn;
+      defineGetter(this, getterKey, getterFn);
+    }
+  }
+
+  $setAction (actionKey, actionFn) {
+    if (!this._actions[actionKey]) {
+      this._actions[actionKey] = actionFn;
+      defineAction(this, actionKey, actionFn);
     }
   }
 
