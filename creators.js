@@ -12,36 +12,19 @@ export function createConstant (store) {
 
 export function createState (store) {
   store._forEachState(key => {
-    Object.defineProperty(store, key, {
-      enumerable: true,
-      get: () => store._state.data[key],
-      set (newValue) {
-        store._state.data[key] = newValue;
-      }
-    })
-  })
+    defineProperty(store, key);
+  });
 }
 
 export function createActions (store) {
   store._forEachAction((actionKey, actionFn) => {
-    store[actionKey] = (payload) => {
-      const fn = actionFn.apply(store, [store, payload]);
-
-      if (isPromise(fn)) {
-        return Promise.resolve(fn);
-      }
-
-      return fn;
-    }
+    defineAction(store, actionKey, actionFn);
   })
 }
 
 export function createGetters (store) {
   store._forEachGetters((getterKey, getterFn) => {
-    const getterComputed = computed(() => getterFn.apply(store, [store]));
-    Object.defineProperty(store, getterKey, {
-      get: () => getterComputed.value
-    })
+    defineGetter(store, getterKey, getterFn);
   })
 }
 
@@ -61,4 +44,34 @@ export function createInjections (stores) {
   });
 
   return injections;
+}
+
+export function defineProperty (store, key) {
+  Object.defineProperty(store, key, {
+    enumerable: true,
+    get: () => store._state.data[key],
+    set (newValue) {
+      store._state.data[key] = newValue;
+    }
+  })
+}
+
+export function defineAction (store, actionKey, actionFn) {
+  store[actionKey] = (payload) => {
+    const fn = actionFn.apply(store, [store, payload]);
+
+    if (isPromise(fn)) {
+      return Promise.resolve(fn);
+    }
+
+    return fn;
+  }
+}
+
+export function defineGetter (store, getterKey, getterFn) {
+  const getterComputed = computed(() => getterFn.apply(store, [store]));
+  Object.defineProperty(store, getterKey, {
+    enumerable: true,
+    get: () => getterComputed.value
+  })
 }

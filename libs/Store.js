@@ -4,7 +4,10 @@ import {
   createConstant,
   createState,
   createActions,
-  createGetters
+  createGetters,
+  defineProperty,
+  defineAction,
+  defineGetter
 } from '../creators';
 import { deepClone } from '../utils';
 
@@ -45,14 +48,21 @@ export default class Store {
       }
     } else {
       this._state.data[prop] = state;
+      defineProperty(this, prop);
+    }
+  }
 
-      Object.defineProperty(this, prop, {
-        enumerable: true,
-        get: () => this._state.data[prop],
-        set (newValue) {
-          this._state.data[prop] = newValue;
-        }
-      })
+  $setGetter (getterKey, getterFn) {
+    if (!this._getters[getterKey]) {
+      this._getters[getterKey] = getterFn;
+      defineGetter(this, getterKey, getterFn);
+    }
+  }
+
+  $setAction (actionKey, actionFn) {
+    if (!this._actions[actionKey]) {
+      this._actions[actionKey] = actionFn;
+      defineAction(this, actionKey, actionFn);
     }
   }
 

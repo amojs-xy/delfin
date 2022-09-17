@@ -1,6 +1,6 @@
 {
   "name": "delfin",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Delfin is new generation of SHARED-STATE manager for Vue 3 application.",
   "main": "index.js",
   "repository": "git",
