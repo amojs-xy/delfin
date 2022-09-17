@@ -19,6 +19,7 @@ export default class Center {
     const [ storeKey, rawStore ] = args;
 
     this[storeKey] = new Store(rawStore);
+    this[storeKey].parent = this;
     return this[storeKey];
   }
 
