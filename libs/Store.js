@@ -3,7 +3,6 @@ import { forEachKeyValue, isObject } from '../utils';
 import {
   createConstant,
   createState,
-  createComputedState,
   createActions,
   createGetters
 } from '../creators';
@@ -14,7 +13,6 @@ export default class Store {
     const { constant, state, getters, actions } = rawStore;
     
     state && (this._state = reactive({ data: state }));
-    state && (this._computedState = {});
     constant && (this._constant = constant);
     getters && (this._getters = getters);
     actions && (this._actions = actions);
@@ -24,7 +22,6 @@ export default class Store {
 
   _initialize () {
     this._state && createState(this);
-    this._computedState && createComputedState(this);
     this._constant && createConstant(this);
     this._getters && createGetters(this);
     this._actions && createActions(this);

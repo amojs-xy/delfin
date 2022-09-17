@@ -45,7 +45,6 @@ export function createActions (store) {
 export function createGetters (store) {
   store._forEachGetters((getterKey, getterFn) => {
     const getterComputed = computed(() => getterFn.apply(store, [store]));
-    store._computedState[getterKey] = getterComputed;
     Object.defineProperty(store, getterKey, {
       get: () => getterComputed.value
     })
