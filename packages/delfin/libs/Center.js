@@ -4,7 +4,7 @@ import { forEachKeyValue, isObject } from '../utils';
 export default class Center {
   constructor (rawCenter) {
     this._rawCenter = rawCenter;
-    this._createStore();
+    this._defineStore();
   }
 
   $setStore (...args) {
@@ -13,25 +13,28 @@ export default class Center {
     }
 
     if (!isObject(args[1])) {
-      throw new Error('The second argument must be the type of Object.');
+      throw new Error('The second argument must be the type `Object`.');
     }
 
     const [ storeKey, rawStore ] = args;
 
-    this[storeKey] = new Store(rawStore);
-    this[storeKey].parent = this;
-    return this[storeKey];
+    return this._createStore(storeKey, rawStore);
   }
 
   install (app) {
     this._createProviders(app);
   }
 
-  _createStore () {
+  _defineStore () {
     forEachKeyValue(this._rawCenter, (storeKey, storeValue) => {
-      this[storeKey] = new Store(storeValue);
-      this[storeKey].parent = this;
+      this._createStore(storeKey, storeValue);
     })
+  }
+
+  _createStore (storeKey, storeValue) {
+    this[storeKey] = new Store(storeValue);
+    this[storeKey].constructor._parent = this;
+    return this[storeKey];
   }
 
   _createProviders (app) {

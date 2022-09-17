@@ -47,6 +47,10 @@ export default class Store {
     }
   }
 
+  get $parent () {
+    return Store._parent;
+  }
+
   $setConstant (...args) {
     if (!args || args.length < 2) {
       throw new Error('$setConstant needs 2 arguments. [ prop, state or value ]');
