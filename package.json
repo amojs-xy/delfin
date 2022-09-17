@@ -1,14 +1,7 @@
 {
   "name": "delfin",
-  "version": "1.0.9",
-  "description": "Delfin is new generation of SHARED-STATE manager for Vue 3 application.",
-  "main": "index.js",
-  "repository": "git",
-  "homepage": "https://github.com/amojs-xy/delfin",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": ["delfin", "vue", "vue3", "vuex", "pinia"],
-  "author": "Amo-xiaoye",
-  "license": "MIT"
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
 }
