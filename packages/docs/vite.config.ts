@@ -4,5 +4,10 @@ import Unocss from 'unocss/vite'
 export default defineConfig({
   plugins: [
     Unocss({ /* options */ }),
-  ]
+  ],
+  server: {
+    fs: {
+      allow: ['../..']
+    }
+  }
 })

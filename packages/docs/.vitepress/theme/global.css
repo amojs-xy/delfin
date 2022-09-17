@@ -11,6 +11,7 @@ body {
   border-radius: 4px;
   background-color: var(--vp-c-bg-soft);
   border: 1px dashed var(--vp-button-alt-hover-bg);
+  user-select: none;
   font-weight: 500;
   font-size: 14px;
 }
