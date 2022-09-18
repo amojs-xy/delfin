@@ -14,9 +14,10 @@ export default defineConfig({
   cleanUrls: 'without-subfolders',
 
   themeConfig: {
-    // outlineTitle: 'ON THIS PAGE',
-    // logo: '/logo.svg',
-    // nav: NavbarConfig,
+    nav: [
+      { text: 'Guide', link: '/introduction' },
+      { text: 'API', link: '/api' },
+    ],
     // sidebar: SidebarConfig,
 
     socialLinks: [
