@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "npm run dev:lib & npm run dev:docs",
-    "build": "npm run build:lib & build:docs",
+    "build": "npm run build:lib & npm run build:docs",
     "dev:lib": "cd ./delfin && npm run dev",
     "dev:docs": "cd ./docs && npm run dev",
     "build:lib": "cd ./delfin && npm run build",
