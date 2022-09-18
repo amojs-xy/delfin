@@ -1,12 +1,11 @@
 {
   "name": "@amo-js/delfin",
+  "license": "MIT",
   "private": true,
-  "packageManager": "pnpm@7.9.0",
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
-    "dev": "cd ./packages/docs && npm run dev"
+    "docs:dev": "cd ./docs && npm run dev",
+    "docs:build": "cd ./docs && npm run build",
+    "docs:serve": "cd ./docs && npm run serve"
   },
   "keywords": [
     "delfin",
@@ -16,9 +15,5 @@
     "pinia",
     "states",
     "shared-state"
-  ],
-  "license": "MIT",
-  "devDependencies": {
-    "pnpm": "^7.11.0"
-  }
+  ]
 }
