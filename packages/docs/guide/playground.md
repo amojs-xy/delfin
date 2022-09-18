@@ -18,19 +18,17 @@ const calculate = value => () => {
 }
 </script>
 
-<h1>Delfin playground</h1>
+# Delfin playground
 
-<section>
-  <h3 class="!mb-2">Basic usage</h3>
+## Basic usage
 
-  <ul class="font-mono">
-    <li>double：<code>{{ counter.count }}</code> * 2 = <code>{{ counter.double }}</code></li>
-    <li>triple：<code>{{ counter.count }}</code> * 3 = <code>{{ counter.triple }}</code></li>
-  </ul>
+### Counter
+<div class="font-mono mt-1">
+  double：<code>{{ counter.count }}</code> * 2 = <code>{{ counter.double }}</code>
+</div>
+<div class="font-mono mt-1">
+  triple：<code>{{ counter.count }}</code> * 3 = <code>{{ counter.triple }}</code>
+</div>
 
-  <div>
-    <button class="btn" v-repeat-click="calculate(1)">PLUS</button>
-    <button class="btn" v-repeat-click="calculate(-1)">MINUS</button>
-  </div>
-
-</section>
+<button class="btn" v-repeat-click="calculate(1)">PLUS</button>
+<button class="btn" v-repeat-click="calculate(-1)">MINUS</button>

@@ -24,31 +24,42 @@ layout: home
 #     details: Lorem ipsum...
 ---
 
-<main class="max-w-960px mx-auto overflow-overlay">
-  <section class="flex flex-col items-center justify-center py-168px px-32px">
-    <h1 class="text-#ff7d00 text-6xl font-bold">Delfin</h1>
-    <h2 class="font-500 mt-3 mb-8">Delfin is a new generation of SHARED-STATE manager for Vue 3 application.</h2>
+<script setup>
+import Logo from './.vitepress/components/Logo.vue'
+</script>
+
+<main class="max-w-960px mx-auto px-32px">
+  <section class="flex flex-col items-center justify-center pt-128px pb-168px">
+    <h1 class="text-#ff7d00 text-6xl font-bold mt-8">
+      <span class="text-0">delfin</span>
+      <Logo />
+    </h1>
+    <p class="font-500 mt-6 mb-8">
+      Delfin is a new generation of <code>SHARED-STATE</code> manager for Vue 3 application.
+    </p>
     <div class="text-center">
-      <a href="/guide/introduction" class="btn !h-34px !leading-34px">😄 Get Started</a>
-      <a href="/guide/playground" class="btn !h-34px !leading-34px">🎮 Playground</a>
+      <a href="/guide/introduction" class="btn !h-34px !leading-32px">📖 Get Started</a>
+      <a href="/guide/playground" class="btn !h-34px !leading-32px">🎮 Playground</a>
     </div>
   </section>
 
-  <section class="pt-96px border-0 border-t border-$vp-c-gray-light-4 border-dashed">
+  <hr class="border-0 border-t border-$vp-c-gray-light-2 border-dashed opacity-70 mx-16" />
+
+  <section class="pt-30px">
+    <h2 class="font-500 text-2xl mt-16 mb-6 uppercase">features</h2>
     <ul class="flex gap-4">
-      <li class="w-33.33% rounded-1 p-4 bg-$vp-c-bg-soft">
+      <li class="w-33.33% rounded-3 p-4 bg-$vp-c-bg-soft">
         <h3 class="uppercase font-500">feature</h3>
         <p>lorem ...</p>
       </li>
-      <li class="w-33.33% rounded-1 p-4 bg-$vp-c-bg-soft">
+      <li class="w-33.33% rounded-3 p-4 bg-$vp-c-bg-soft">
         <h3 class="uppercase font-500">feature</h3>
         <p>lorem ...</p>
       </li>
-      <li class="w-33.33% rounded-1 p-4 bg-$vp-c-bg-soft">
+      <li class="w-33.33% rounded-3 p-4 bg-$vp-c-bg-soft">
         <h3 class="uppercase font-500">feature</h3>
         <p>lorem ...</p>
       </li>
     </ul>
   </section>
-
 </main>
