@@ -1,3 +1,5 @@
+// stores/modules/counter.js
+
 export default {
   state: {
     count: 0
@@ -11,11 +13,11 @@ export default {
     }
   },
   actions: {
-    setCount (store, count) {
-      store.count += count;
+    setCountPlus (store) {
+      store.count += 1;
     },
-    setCount1 (store, count) {
-      store.count1 -= count;
+    setCountMinus (store) {
+      store.count -= 1;
     }
   }
 }

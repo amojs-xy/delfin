@@ -7,27 +7,25 @@ export default defineConfig({
   // lang: 'en-US',
   lang: 'zh-CN',
   title: 'Delfin',
-  titleTemplate: 'Vite & Vue powered static site generator',
-  description: 'Just playing around.',
+  titleTemplate: 'Vue share states library.',
+  description: 'Delfin is new generation of SHARED-STATE manager for Vue 3 application.',
   ignoreDeadLinks: true, // 防止因为死链接导致的构建失败
   lastUpdated: true, // 使用 git commit 获取最后更新时间
-  head: [
-    ['meta', { content: 'Delfin is new generation of SHARED-STATE manager for Vue 3 application.' }]
-  ],
+  cleanUrls: 'without-subfolders',
 
   themeConfig: {
-    outlineTitle: 'ON THIS PAGE',
-    // logo: '/logo.svg',
-    // nav: NavbarConfig,
+    nav: [
+      { text: 'Guide', link: '/introduction' },
+      { text: 'API', link: '/api' },
+    ],
     // sidebar: SidebarConfig,
-    lastUpdatedText: '最后更新于：',
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/amojs-xy/delfin' }
     ],
 
     editLink: {
-      pattern: 'https://github.com/vuejs/vitepress/edit/main/docs/:path',
+      pattern: 'https://github.com/amojs-xy/delfin/edit/master/docs/:path',
       text: 'Edit this page on GitHub'
     },
 
