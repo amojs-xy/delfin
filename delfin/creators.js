@@ -35,7 +35,7 @@ export function defineConstant (store, key) {
     enumerable: true,
     configurable: true,
     get: () => store._constant[key]
-  })
+  });
 }
 
 export function defineState (store, key) {
