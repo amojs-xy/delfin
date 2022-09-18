@@ -1,11 +1,15 @@
 {
-  "name": "@amo-js/delfin",
+  "name": "@delfin/root",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "scripts": {
-    "docs:dev": "cd ./docs && npm run dev",
-    "docs:build": "cd ./docs && npm run build",
-    "docs:serve": "cd ./docs && npm run serve"
+    "dev": "npm run dev:lib & npm run dev:docs",
+    "build": "npm run build:lib & build:docs",
+    "dev:lib": "cd ./delfin && npm run dev",
+    "dev:docs": "cd ./docs && npm run dev",
+    "build:lib": "cd ./delfin && npm run build",
+    "build:docs": "cd ./docs && npm run build"
   },
   "keywords": [
     "delfin",

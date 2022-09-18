@@ -1,0 +1,27 @@
+{
+  "includes": ["delfin/**/*"],
+  "compilerOptions": {
+    "sourceMap": true,
+    "alwaysStrict": false,
+    "declaration": true,
+    "declarationMap": true,
+    "downlevelIteration": true,
+    "importHelpers": true,
+    "inlineSources": true,
+    "isolatedModules": true,
+    "lib": ["es6"],
+    "moduleResolution": "node",
+    "noEmitHelpers": true,
+    "noErrorTruncation": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noImplicitUseStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "preserveWatchOutput": true,
+    "strictBindCallApply": false,
+    "strict": true,
+    "target": "es6",
+    "types": ["node"],
+  }
+}
