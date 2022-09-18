@@ -28,25 +28,5 @@ export function createStore (rawStore) {
 }
 
 export function useCenter () {
-  // return createInjections(stores);
   return inject('center', {});
 }
-
-// Center {
-//   counter: {
-
-//   },
-//   user: {
-
-//   },
-//   calculator: {
-
-//   }
-// }
-
-/**
- * Store {
- * 
- * }
- * 
- */

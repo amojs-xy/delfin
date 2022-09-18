@@ -1,5 +1,5 @@
 import { 
-  reactive 
+  reactive
 } from 'vue';
 
 import { 
@@ -35,7 +35,10 @@ export default class Store {
     constant && (this._constant = constant);
     getters && (this._getters = getters);
     actions && (this._actions = actions);
-    this._rawStore = deepClone(rawStore);
+    this._rawStore = {
+      origin: deepClone(rawStore),
+      dynamic: deepClone(rawStore)
+    };
 
     this._initialize();
   }

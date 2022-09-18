@@ -43,9 +43,11 @@ export default class Center {
 
   _createProviders (app) {
     app.provide('center', this);
+    app.config.globalProperties.$center = this;
 
     forEachKeyValue(this, (storeKey, storeValue) => {
       app.provide(storeKey, storeValue);
+      app.config.globalProperties['$' + storeKey] = storeValue;
     })
   }
 }
