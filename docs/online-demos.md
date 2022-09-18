@@ -1,5 +1,5 @@
 <script>
-  import RepeatClick from '../.vitepress/directives/repeat-click'
+  import RepeatClick from './.vitepress/directives/repeat-click'
 
   export default {
     directives: {
@@ -21,7 +21,6 @@ const calculate = value => () => {
 # Delfin playground
 
 ## Basic usage
-
 ### Counter
 <div class="font-mono mt-1">
   double：<code>{{ counter.count }}</code> * 2 = <code>{{ counter.double }}</code>
