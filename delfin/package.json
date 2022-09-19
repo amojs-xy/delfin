@@ -1,6 +1,6 @@
 {
   "name": "delfin",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Delfin is a new generation of SHARED-STATE manager for Vue 3 application.",
   "license": "MIT"
 }

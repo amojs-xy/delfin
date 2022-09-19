@@ -31,6 +31,7 @@ export function createActions (store) {
 }
 
 export function defineConstant (store, key) {
+  // this._constant.TITLE
   Object.defineProperty(store, key, {
     enumerable: true,
     configurable: true,
@@ -68,10 +69,10 @@ export function defineAction (store, actionKey, actionFn) {
   store[actionKey] = (payload) => {
     const res = actionFn.apply(store, [store, payload]);
 
-    if (!isPromise(res)) {
-      return Promise.resolve(res);
+    if (isPromise(res)) {
+      return Promise.resolve(res);  
     }
 
-    return fn;
+    return res;
   }
 }

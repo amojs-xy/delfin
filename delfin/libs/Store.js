@@ -31,6 +31,7 @@ export default class Store {
       actions 
     } = rawStore;
     
+    // data: state
     state && (this._state = reactive({ data: state }));
     state && (this._rawState = deepClone(state));
     constant && (this._constant = constant);
@@ -59,7 +60,7 @@ export default class Store {
 
     const [ prop, state ] = args;
 
-    Store.setValue(this, prop, state, this._constant, () => {
+    Store.setValue('constant', this, prop, state, this._constant, () => {
       defineConstant(this, prop);
     });
   }
@@ -71,7 +72,7 @@ export default class Store {
 
     const [ prop, state ] = args;
 
-    Store.setValue(this, prop, state, this._state.data, () => {
+    Store.setValue('state', this, prop, state, this._state.data, () => {
       defineState(this, prop);
     });
   }
@@ -117,23 +118,23 @@ export default class Store {
     forEachKeyValue(this._actions, callback);
   }
 
-  static setValue (store, prop, state, data, callback) {
+  static setValue (field, store, prop, state, data, callback) {
     if (data.hasOwnProperty(prop)) {
       if (isObject(state)) {
         data[prop] = {
           ...deepClone(data[prop]),
           ...state
         }
-        store._rawState[prop] = {
+        field === 'state' && (store._rawState[prop] = {
           ...store._rawState[prop],
           ...deepClone(state)
-        }
+        })
       } else {
         data[prop] = state;
       }
     } else {
       data[prop] = state;
-      store._rawState[prop] = deepClone(state);
+      field === 'state' && (store._rawState[prop] = deepClone(state));
       callback();
     }
   }
