@@ -124,6 +124,10 @@ export default class Store {
           ...deepClone(data[prop]),
           ...state
         }
+        store._rawState[prop] = {
+          ...store._rawState[prop],
+          ...deepClone(state)
+        }
       } else {
         data[prop] = state;
       }
@@ -152,7 +156,7 @@ export default class Store {
       }
     })
 
-    store._state.data = deepClone(rawState);
+    store._state.data = deepClone(originState);
   }
 
   static resetConstant (store) {

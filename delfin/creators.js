@@ -46,7 +46,7 @@ export function defineState (store, key) {
     set (newValue) {
       store._state.data[key] = newValue;
     }
-  })
+  });
 }
 
 export function defineGetter (store, getterKey, getterFn) {
@@ -55,15 +55,15 @@ export function defineGetter (store, getterKey, getterFn) {
     enumerable: true,
     configurable: true,
     get: () => getterComputed.value
-  })
+  });
 }
 
 export function defineAction (store, actionKey, actionFn) {
   store[actionKey] = (payload) => {
-    const fn = actionFn.apply(store, [store, payload]);
+    const res = actionFn.apply(store, [store, payload]);
 
-    if (!isPromise(fn)) {
-      return Promise.resolve(fn);
+    if (!isPromise(res)) {
+      return Promise.resolve(res);
     }
 
     return fn;

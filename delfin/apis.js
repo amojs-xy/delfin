@@ -30,3 +30,4 @@ export function createStore (rawStore) {
 export function useCenter () {
   return inject('center', {});
 }
+

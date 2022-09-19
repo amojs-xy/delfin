@@ -29,12 +29,6 @@ export default class Center {
     this._createProviders(app);
   }
 
-  static createStore (center, storeKey, storeValue) {
-    center[storeKey] = new Store(storeValue);
-    center[storeKey].constructor._parent = center;
-    return center[storeKey];
-  }
-
   _defineStore () {
     forEachKeyValue(this._rawCenter, (storeKey, storeValue) => {
       Center.createStore(this, storeKey, storeValue);
@@ -49,5 +43,11 @@ export default class Center {
       app.provide(storeKey, storeValue);
       app.config.globalProperties['$' + storeKey] = storeValue;
     })
+  }
+
+  static createStore (center, storeKey, storeValue) {
+    center[storeKey] = new Store(storeValue);
+    center[storeKey].constructor._parent = center;
+    return center[storeKey];
   }
 }
