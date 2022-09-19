@@ -19,5 +19,8 @@
     "pinia",
     "states",
     "shared-state"
-  ]
+  ],
+  "devDependencies": {
+    "rollup-plugin-dts": "^4.2.2"
+  }
 }

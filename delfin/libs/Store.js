@@ -91,10 +91,10 @@ export default class Store {
   }
 
   $resetStore () {
-    this._constant && Store.removeConstant(this);
-    this._state && Store.removeState(this);
-    this._getters &&  Store.removeGetter(this);
-    this._actions && Store.removeAction(this);
+    this._constant && Store.resetConstant(this);
+    this._state && Store.resetState(this);
+    this._getters &&  Store.resetGetter(this);
+    this._actions && Store.resetAction(this);
   }
 
   $resetState () {
@@ -134,7 +134,7 @@ export default class Store {
     }
   }
 
-  static removeState (store) {
+  static resetState (store) {
     const state = store._state.data;
     const rawState = store._rawState;
     const originState = store._rawStore.state;
@@ -155,7 +155,7 @@ export default class Store {
     store._state.data = deepClone(rawState);
   }
 
-  static removeConstant (store) {
+  static resetConstant (store) {
     const constant = store._constant;
     const rawConstant = store._rawStore.constant;
 
@@ -167,7 +167,7 @@ export default class Store {
     })
   }
 
-  static removeGetter (store) {
+  static resetGetter (store) {
     const getters = store._getters;
     const rawGetters = store._rawStore.getters;
 
@@ -179,7 +179,7 @@ export default class Store {
     })
   }
 
-  static removeAction (store) {
+  static resetAction (store) {
     const actions = store._actions;
     const rawActions = store._rawStore.actions;
 
