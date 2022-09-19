@@ -1,5 +1,5 @@
 import { 
-  computed
+  computed,
 } from 'vue';
 
 import { 
@@ -34,7 +34,10 @@ export function defineConstant (store, key) {
   Object.defineProperty(store, key, {
     enumerable: true,
     configurable: true,
-    get: () => store._constant[key]
+    get: () => store._constant[key],
+    set () {
+      throw new Error('Constant value can`t be changed');
+    }
   });
 }
 
@@ -54,7 +57,10 @@ export function defineGetter (store, getterKey, getterFn) {
   Object.defineProperty(store, getterKey, {
     enumerable: true,
     configurable: true,
-    get: () => getterComputed.value
+    get: () => getterComputed.value,
+    set () {
+      throw new Error('Getter value can`t be changed');
+    }
   });
 }
 
